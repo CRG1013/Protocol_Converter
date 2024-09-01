@@ -84,12 +84,6 @@ namespace VSM_Conversion
             //StartListening();
         }
 
-        private void StartListening()
-        {
-            //asyncResult = client.BeginReceive(Receive, new object());
-
-            //Console.WriteLine("s");
-        }
 
         private static void Receive()
         {
