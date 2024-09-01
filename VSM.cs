@@ -45,19 +45,6 @@ namespace VSM_Conversion
             transbefor2 = transbeforL2;
             transafter1 = transafterL1;
             transafter2 = transafterL2;
-            /*// 문자열 to hex
-            string resultHex = string.Empty;
-            byte[] arr_byteStr = Encoding.Default.GetBytes("2.0");
-
-            foreach (byte byteStr in arr_byteStr)
-                resultHex += string.Format("{0:X2}", byteStr);         
-            Console.WriteLine(resultHex);
-
-            // int to hex
-            int a = 751;
-            Console.WriteLine(a.ToString("X8"));*/
-
-
         }
 
       
