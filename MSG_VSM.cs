@@ -65,17 +65,7 @@ namespace VSM_Conversion
             messageType = _messageType;
             rcvdata = _rcvdata;
            
-            /* Console.WriteLine(sourcePort);
-             Console.WriteLine(destinationPort);
-             Console.WriteLine(messageLength);
-             Console.WriteLine(sourceID);
-             Console.WriteLine(destinationID);
-             Console.WriteLine(messageType);
- */
-
-            
-            
-            
+           
             if(messageType == 6)
             {
                 double[] doubleArray = new double[3];
@@ -124,32 +114,6 @@ namespace VSM_Conversion
         {
             return Roll;
         }
-        public static void Decoder(byte[] revData)
-        {
-            //test
-            //Console.WriteLine("----------------------------------------------s2");
-            List<UInt16> uint16ListConverted = new List<UInt16>();
-            for (int i = 0; i < revData.Length; i += 2)
-            {
-                UInt16 uint16Value = BitConverter.ToUInt16(revData, i);
-                uint16ListConverted.Add(uint16Value);
-            }
-            sourcePort = uint16ListConverted[0];
-            destinationPort = uint16ListConverted[1];
-            messageLength = uint16ListConverted[2];
-            sourceID = uint16ListConverted[3];
-            destinationID = uint16ListConverted[4];
-            messageType = uint16ListConverted[5];
-            //date 부분은 추후에 추가하기
-            // 결과 출력
-            /*Console.WriteLine("UInt16 List:");
-            
-            foreach (UInt16 value in uint16ListConverted)
-            {
-                Console.WriteLine(value);
-            }*/
-
-
 
 
         }
