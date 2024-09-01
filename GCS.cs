@@ -161,7 +161,7 @@ namespace ControlStation
         }
         public void imgViewMethod() //UA 자세 표시
         {
-
+            /*
             VSM_Conversion.MSG_VSM.reqControlState();
             int old_max = 80;
             int old_min = -100;
@@ -186,10 +186,10 @@ namespace ControlStation
             {
                 pictureBox1.Image = im[index];
                 pictureBox1.Refresh();
-            }
+            }*/
 
 
-            /*try
+            try
             {
                 double angle = (double)(VSM_Conversion.MSG_VSM.getRoll());
                 int index3 = getImageIndex(angle);
@@ -201,7 +201,7 @@ namespace ControlStation
             catch (Exception e7)
             {
                 Console.WriteLine("error");
-            }*/
+            }
 
 
         }
