@@ -7,7 +7,7 @@ void control(int);
 void reqCntData(double, double, double);
 //메시지의 타입
 typedef enum msgtype {
-  connect = 0,      //첫 연결 시
+
   throttle_up = 1,      //GCS 명령
   throttle_down = 11,
   request_off = 2,  // 시동 off
@@ -70,7 +70,7 @@ void setup() {
   WiFi.softAPConfig(ip, gateway, subnet);  //AP 모드로 설정
   Serial.print("Setting AP (Access Point)...");
   WiFi.softAP("MSP", "");
-  //WiFi.onEvent(WiFiEvent);  // 연결 감지
+
   udp.begin(upPort);
   gps.begin(9600);  // GSP 설정
 
@@ -142,11 +142,7 @@ void mspMain(void* param) {
     if (packetSize) {
       udp.read(buf, 80);
       Serial.println(buf[4]);
-      if (buf[4] == connect) {  //첫 연결 시
-        Serial.println(buf[4]);
-        uaState();
-      }
-      //byte data[int(itoabuf[4])];                  // 패킷 size부분을 통해 배열 크기 결정(payload data넣기 위함)
+      
       if (buf[4] == throttle_up && throttle >= 200) {  //throttle값 변경
         throttle = (int)buf[5] * 100;
         Serial.println(buf[5]);
@@ -423,37 +419,4 @@ void encode() {
   udp.write(bytearr, 50);
   Serial.println("send encoder");
   udp.endPacket();  // write 사용후 필수
-}
-
-void uaState() {
-  double ID[] = { 2, upPort };
-  byte byteArray[sizeof(ID)];
-
-  for (int i = 0; i < sizeof(ID) / sizeof(double); i++) {
-    double value = ID[i];
-    byte* ptr = (byte*)&value;
-    for (int j = 0; j < sizeof(double); j++) {
-      byteArray[i * sizeof(double) + j] = *(ptr + j);
-    }
-  }
-  req.size = sizeof(byteArray);
-  req.type = 0;
-  req.payload = byteArray;
-  encode();
-}
-
-void WiFiEvent(WiFiEvent_t event, WiFiEventInfo_t info) {
-  switch (event) {
-    case ARDUINO_EVENT_WIFI_AP_STACONNECTED:
-      // Serial.print("Device Connected: ");
-      uaState();
-      delay(2000);
-      break;
-    case ARDUINO_EVENT_WIFI_AP_STADISCONNECTED:
-      //Serial.print("Device Disconnected: ");
-
-      break;
-    default:
-      break;
-  }
 }
