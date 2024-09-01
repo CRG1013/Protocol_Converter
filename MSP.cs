@@ -113,80 +113,9 @@ namespace VSM_Conversion
 
         }
 
-        public void get()
-        {
-
-        }
-        public static void set(byte[] packet)
-        {
-            deconde(packet);
-        }
-
-        public static void ConnectReq()
-        {
-            size = 1;
-            type = 0;
-            payload = new uint[size];
-            payload[0] = 9000;
-            encodBuf = new ArrayList { start, protocal, direction, size, type, payload};
-            encode(encodBuf);
-            
-        }
+      
         // MSP msg
-        public static void CmdThrottleUp()
-        {
-            if (Throttle < 800)
-                Throttle += 100;
-            size = 1;
-            type = 1; // cmd
-            payload = new uint[size];
-            payload[0] = Throttle / 100; // payload
-            encodBuf = new ArrayList { start, protocal, direction, size, type, payload };
-            encode(encodBuf);
-        }
-        public static void CmdThrottleDown()
-        {
-            if (Throttle > 200)
-                Throttle -= 100;
-            size = 1;
-            type = 11; // cmd
-            payload = new uint[size];
-            payload[0] = Throttle / 100; // payload
-            encodBuf = new ArrayList { start, protocal, direction, size, type, payload };
-            encode(encodBuf);
-        }
-        public static void reqOff()
-        {
-            size = 0;
-            type = 2;
-            encodBuf = new ArrayList { start, protocal, direction, size, type };
-            Throttle = 0;
-            encode(encodBuf);
-        }
-        public static void reqOn()
-        {
-            size = 0;
-            type = 3;
-            encodBuf = new ArrayList { start, protocal, direction, size, type };
-            Throttle = 200;
-            encode(encodBuf);
-        }
-
-        public  static void reqCntdata()
-        {
-            size = 3;
-            type = 4;
-            encodBuf = new ArrayList { start, protocal, direction, size, type };
-            encode(encodBuf);
-        }
-
-        public static void reqGps()
-        {
-            size = 2;
-            type = 5;
-            encodBuf = new ArrayList { start, protocal, direction, size, type };
-            encode(encodBuf);
-        }
+ 
 
         private static void respControl(byte[] packet)
         {
